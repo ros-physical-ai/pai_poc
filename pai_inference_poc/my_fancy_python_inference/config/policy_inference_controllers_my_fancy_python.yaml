@@ -1,0 +1,21 @@
+controller_manager:
+  ros__parameters:
+    update_rate: 100
+
+    joint_state_broadcaster:
+      type: joint_state_broadcaster/JointStateBroadcaster
+
+    policy_inference:
+      type: policy_inference_demo/Ros2ControlPolicyInference
+
+policy_inference:
+  ros__parameters:
+    backend_plugin: policy_inference_demo/PythonBackendBridge
+    model_uri: fancy_python.onnx
+    output_size: 4
+    output_scale: 1.0
+    output_bias: 0.0
+    python_module: my_fancy_python_inference.fancy_python_backend
+    python_class: FancyPythonBackend
+    demo_input: [1.0, 2.0, 3.0]
+
