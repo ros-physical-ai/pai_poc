@@ -29,8 +29,10 @@ public:
 
   /**
    * @brief Run one inference step.
-   * @param request Input feature request.
-   * @param response Output response.
+   * @param request Input request wrapper (kept as a struct for forward-compatible
+   * API evolution beyond only a raw feature vector).
+   * @param response Output wrapper. Implementations should populate `outputs`
+   * and a useful `backend_id` for observability.
    * @return True on successful inference.
    */
   virtual bool infer(const InferenceRequest & request, InferenceResponse & response) = 0;

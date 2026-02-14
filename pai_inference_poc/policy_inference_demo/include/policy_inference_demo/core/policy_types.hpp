@@ -14,18 +14,37 @@ namespace policy_inference_demo
 
 /**
  * @brief Inference request container.
+ *
+ * This currently wraps one numeric feature vector, but it intentionally exists
+ * as a named request type so the plugin contract can evolve without changing
+ * function signatures across all backend implementations.
+ *
+ * Future extensions can add metadata such as timestamps, frame ids, tensor
+ * names, or quality flags while preserving the same infer() API.
  */
 struct InferenceRequest
 {
+  /// Flattened input features used by this PoC skeleton.
   std::vector<double> features;
 };
 
 /**
  * @brief Inference response container.
+ *
+ * Similar to InferenceRequest, this wrapper keeps the backend API stable while
+ * allowing future response metadata to be added without breaking interface contracts.
  */
 struct InferenceResponse
 {
+  /// Flattened output vector produced by the backend.
   std::vector<double> outputs;
+  /**
+   * @brief Runtime identity of the backend that produced this response.
+   *
+   * In this PoC, this is mainly used for logging and test visibility. It is
+   * especially useful when using bridge-style plugins (for example Python),
+   * where one plugin id can dispatch to different concrete backend classes.
+   */
   std::string backend_id;
 };
 
