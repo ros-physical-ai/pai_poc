@@ -6,7 +6,7 @@ controller_manager:
       type: joint_state_broadcaster/JointStateBroadcaster
 
     policy_inference:
-      type: policy_inference_demo/Ros2ControlPolicyInference
+      type: policy_inference_ros2_control/Ros2ControlPolicyInference
 
 policy_inference:
   ros__parameters:

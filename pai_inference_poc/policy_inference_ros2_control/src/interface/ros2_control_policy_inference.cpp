@@ -7,7 +7,7 @@
  * 2. `kinematics_interface/kinematics_interface/test/kinematics_interface_common_tests.hpp`
  */
 
-#include "policy_inference_demo/interface/ros2_control_policy_inference.hpp"
+#include "policy_inference_ros2_control/interface/ros2_control_policy_inference.hpp"
 
 #include <cstring>
 #include <memory>
@@ -18,12 +18,12 @@
 #include "pluginlib/exceptions.hpp"
 #include "rclcpp/logging.hpp"
 
-namespace policy_inference_demo
+namespace policy_inference_ros2_control
 {
 
 namespace
 {
-rclcpp::Logger kLogger = rclcpp::get_logger("policy_inference_demo.ros2_control_controller");
+rclcpp::Logger kLogger = rclcpp::get_logger("policy_inference_ros2_control.controller");
 }  // namespace
 
 controller_interface::CallbackReturn Ros2ControlPolicyInference::on_init()
@@ -68,11 +68,13 @@ bool Ros2ControlPolicyInference::load_backend_plugin()
 
   try
   {
-    backend_loader_ = std::make_unique<pluginlib::ClassLoader<InferenceBackendBase>>(
+    backend_loader_ = std::make_unique<
+      pluginlib::ClassLoader<policy_inference_demo::InferenceBackendBase>>(
       "policy_inference_demo",
       "policy_inference_demo::InferenceBackendBase");
     auto backend_instance = backend_loader_->createUniqueInstance(config_.backend_plugin);
-    backend_ = std::shared_ptr<InferenceBackendBase>(std::move(backend_instance));
+    backend_ = std::shared_ptr<policy_inference_demo::InferenceBackendBase>(
+      std::move(backend_instance));
   }
   catch (const pluginlib::PluginlibException & ex)
   {
@@ -104,9 +106,9 @@ bool Ros2ControlPolicyInference::run_inference_once(const char * context_tag)
     return false;
   }
 
-  InferenceRequest request;
+  policy_inference_demo::InferenceRequest request;
   request.features = demo_input_;
-  InferenceResponse response;
+  policy_inference_demo::InferenceResponse response;
 
   if (!backend_->infer(request, response))
   {
@@ -177,8 +179,8 @@ controller_interface::return_type Ros2ControlPolicyInference::update(
                                       : controller_interface::return_type::ERROR;
 }
 
-}  // namespace policy_inference_demo
+}  // namespace policy_inference_ros2_control
 
 PLUGINLIB_EXPORT_CLASS(
-  policy_inference_demo::Ros2ControlPolicyInference,
+  policy_inference_ros2_control::Ros2ControlPolicyInference,
   controller_interface::ControllerInterface)

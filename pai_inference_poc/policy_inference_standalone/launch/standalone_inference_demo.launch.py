@@ -45,7 +45,7 @@ def generate_launch_description() -> LaunchDescription:
     )
 
     standalone_node = Node(
-        package="policy_inference_demo",
+        package="policy_inference_standalone",
         executable="standalone_inference_demo",
         output="screen",
         parameters=[

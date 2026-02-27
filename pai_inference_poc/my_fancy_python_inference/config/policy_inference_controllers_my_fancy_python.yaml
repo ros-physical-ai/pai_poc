@@ -6,7 +6,7 @@ controller_manager:
       type: joint_state_broadcaster/JointStateBroadcaster
 
     policy_inference:
-      type: policy_inference_demo/Ros2ControlPolicyInference
+      type: policy_inference_ros2_control/Ros2ControlPolicyInference
 
 policy_inference:
   ros__parameters:
@@ -18,4 +18,3 @@ policy_inference:
     python_module: my_fancy_python_inference.fancy_python_backend
     python_class: FancyPythonBackend
     demo_input: [1.0, 2.0, 3.0]
-

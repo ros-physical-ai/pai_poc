@@ -1,4 +1,4 @@
-"""Example `ros2_control` bringup for `policy_inference_demo`."""
+"""Example `ros2_control` bringup for `policy_inference_ros2_control`."""
 
 import os
 
@@ -10,7 +10,7 @@ from launch_ros.actions import Node
 
 
 def generate_launch_description() -> LaunchDescription:
-    package_share = get_package_share_directory("policy_inference_demo")
+    package_share = get_package_share_directory("policy_inference_ros2_control")
     urdf_path = os.path.join(package_share, "urdf", "policy_inference_demo.urdf")
     default_controllers = os.path.join(
         package_share,

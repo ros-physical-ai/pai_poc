@@ -18,7 +18,8 @@ TEST(Ros2ControlPluginTests, Loads)
     "controller_interface", "controller_interface::ControllerInterface");
   try
   {
-    auto plugin = loader.createSharedInstance("policy_inference_demo/Ros2ControlPolicyInference");
+    auto plugin =
+      loader.createSharedInstance("policy_inference_ros2_control/Ros2ControlPolicyInference");
     ASSERT_NE(plugin, nullptr);
   }
   catch (const std::exception & ex)

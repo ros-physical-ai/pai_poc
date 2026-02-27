@@ -18,7 +18,7 @@
 #include "controller_interface/controller_interface.hpp"
 #include "pluginlib/class_loader.hpp"
 
-namespace policy_inference_demo
+namespace policy_inference_ros2_control
 {
 
 /**
@@ -56,10 +56,10 @@ private:
 
   bool initialized_ = false;
   bool active_ = false;
-  InferenceBackendConfig config_;
+  policy_inference_demo::InferenceBackendConfig config_;
   std::vector<double> demo_input_;
-  std::unique_ptr<pluginlib::ClassLoader<InferenceBackendBase>> backend_loader_;
-  std::shared_ptr<InferenceBackendBase> backend_;
+  std::unique_ptr<pluginlib::ClassLoader<policy_inference_demo::InferenceBackendBase>> backend_loader_;
+  std::shared_ptr<policy_inference_demo::InferenceBackendBase> backend_;
 };
 
-}  // namespace policy_inference_demo
+}  // namespace policy_inference_ros2_control

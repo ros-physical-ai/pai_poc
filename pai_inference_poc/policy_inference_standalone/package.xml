@@ -1,21 +1,22 @@
 <?xml version="1.0"?>
 <?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
 <package format="3">
-  <name>policy_inference_demo</name>
+  <name>policy_inference_standalone</name>
   <version>0.0.1</version>
   <description>
-    Shared backend contract and built-in backend plugins for policy inference PoC.
+    Standalone ROS 2 host executable for policy inference backends.
   </description>
   <maintainer email="jennifer@example.com">Jennifer</maintainer>
   <license>Apache-2.0</license>
 
   <buildtool_depend>ament_cmake</buildtool_depend>
-  <buildtool_depend>ament_cmake_python</buildtool_depend>
 
   <depend>pluginlib</depend>
+  <depend>policy_inference_demo</depend>
   <depend>rclcpp</depend>
 
-  <test_depend>ament_cmake_gtest</test_depend>
+  <exec_depend>launch</exec_depend>
+  <exec_depend>launch_ros</exec_depend>
 
   <export>
     <build_type>ament_cmake</build_type>
