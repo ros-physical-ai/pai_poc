@@ -8,18 +8,17 @@ This package owns the backend-facing contract and backend plugin implementations
 It does not host the `ros2_control` adapter or standalone executable.
 
 For the cross-package host architecture (controller host + standalone host),
-see `../README.md` section `Architecture`.
+see [the architecture section in the main README.md](../README.md#architecture)
 
 Host packages:
 
 1. `policy_inference_ros2_control` for the controller plugin.
 2. `policy_inference_standalone` for the standalone executable.
 
+## Notes
 
-## Run
-
-This package includes a one-shot executable for backend plugin smoke testing:
-`backend_plugin_smoke`.
+1. This is an architecture skeleton, not a production real-time controller.
+2. Input collection and output publishing are deferred to future iterations.
 
 ## Install
 
@@ -30,6 +29,11 @@ cd colcon_ws
 colcon build --symlink-install --packages-up-to policy_inference_core
 source install/setup.bash
 ```
+
+## Run
+
+This package includes a one-shot executable for backend plugin smoke testing:
+`backend_plugin_smoke`.
 
 ### Built-in C++ backend
 
@@ -110,12 +114,3 @@ Then configure:
 1. `backend_plugin: policy_inference_core/PythonBackendBridge`
 2. `python_module: your_package.your_module`
 3. `python_class: YourBackendClass`
-
-## Notes
-
-1. This is an architecture skeleton, not a production real-time controller.
-2. Input collection and output publishing are deferred to future iterations.
-
-## References
-
-1. `kinematics_interface` repository [kinematics_interface](https://github.com/ros-controls/kinematics_interface)
