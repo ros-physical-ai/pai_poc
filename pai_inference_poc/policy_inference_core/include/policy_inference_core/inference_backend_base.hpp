@@ -5,11 +5,11 @@
 
 #pragma once
 
-#include "policy_inference_demo/core/policy_types.hpp"
+#include "policy_inference_core/policy_types.hpp"
 
 #include <string>
 
-namespace policy_inference_demo
+namespace policy_inference_core
 {
 
 /**
@@ -44,4 +44,4 @@ public:
   virtual std::string id() const = 0;
 };
 
-}  // namespace policy_inference_demo
+}  // namespace policy_inference_core

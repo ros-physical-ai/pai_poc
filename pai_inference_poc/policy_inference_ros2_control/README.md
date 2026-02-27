@@ -9,7 +9,7 @@ Thin `ros2_control` adapter package for policy inference backends.
 
 ## Dependencies
 
-The backend contract and backend plugins are provided by `policy_inference_demo`.
+The backend contract and backend plugins are provided by `policy_inference_core`.
 This package only hosts the `ros2_control` integration layer.
 
 ## Install
@@ -18,7 +18,7 @@ Build and source the packages required to run this package's launch and plugin:
 
 ```bash
 cd colcon_ws
-colcon build --symlink-install --packages-up-to policy_inference_demo policy_inference_ros2_control
+colcon build --symlink-install --packages-up-to policy_inference_core policy_inference_ros2_control
 source install/setup.bash
 ```
 

@@ -18,7 +18,7 @@ namespace
 rclcpp::Logger kLogger = rclcpp::get_logger("my_fancy_cpp_inference.backend");
 }  // namespace
 
-bool FancyCppBackend::initialize(const policy_inference_demo::InferenceBackendConfig & config)
+bool FancyCppBackend::initialize(const policy_inference_core::InferenceBackendConfig & config)
 {
   config_ = config;
   infer_call_count_ = 0U;
@@ -32,8 +32,8 @@ bool FancyCppBackend::initialize(const policy_inference_demo::InferenceBackendCo
 }
 
 bool FancyCppBackend::infer(
-  const policy_inference_demo::InferenceRequest & request,
-  policy_inference_demo::InferenceResponse & response)
+  const policy_inference_core::InferenceRequest & request,
+  policy_inference_core::InferenceResponse & response)
 {
   if (!initialized_ || request.features.empty())
   {
@@ -69,5 +69,5 @@ std::string FancyCppBackend::id() const
 
 PLUGINLIB_EXPORT_CLASS(
   my_fancy_cpp_inference::FancyCppBackend,
-  policy_inference_demo::InferenceBackendBase)
+  policy_inference_core::InferenceBackendBase)
 

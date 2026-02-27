@@ -3,8 +3,8 @@
  * @brief Tiny one-shot demo executable for backend plugin loading.
  */
 
-#include "policy_inference_demo/core/inference_backend_base.hpp"
-#include "policy_inference_demo/core/policy_types.hpp"
+#include "policy_inference_core/inference_backend_base.hpp"
+#include "policy_inference_core/policy_types.hpp"
 
 #include <iostream>
 #include <memory>
@@ -18,8 +18,8 @@
  * @brief Program entry point.
  *
  * Optional mode argument:
- * 1. `cpp` (default): uses `policy_inference_demo/ExampleCppBackend`
- * 2. `python`: uses `policy_inference_demo/PythonBackendBridge`
+ * 1. `cpp` (default): uses `policy_inference_core/ExampleCppBackend`
+ * 2. `python`: uses `policy_inference_core/PythonBackendBridge`
  */
 int main(int argc, char ** argv)
 {
@@ -37,28 +37,28 @@ int main(int argc, char ** argv)
     return 1;
   }
 
-  policy_inference_demo::InferenceBackendConfig config;
-  config.backend_plugin = "policy_inference_demo/ExampleCppBackend";
+  policy_inference_core::InferenceBackendConfig config;
+  config.backend_plugin = "policy_inference_core/ExampleCppBackend";
   config.model_uri = "example_model.onnx";
   config.output_size = 3U;
   config.output_scale = 1.0;
   config.output_bias = 0.0;
   if (mode == "python")
   {
-    config.backend_plugin = "policy_inference_demo/PythonBackendBridge";
-    config.python_module = "policy_inference_demo_py.example_python_backend";
+    config.backend_plugin = "policy_inference_core/PythonBackendBridge";
+    config.python_module = "policy_inference_core_py.example_python_backend";
     config.python_class = "ExamplePythonBackend";
   }
 
-  std::unique_ptr<pluginlib::ClassLoader<policy_inference_demo::InferenceBackendBase>> loader;
-  std::shared_ptr<policy_inference_demo::InferenceBackendBase> backend;
+  std::unique_ptr<pluginlib::ClassLoader<policy_inference_core::InferenceBackendBase>> loader;
+  std::shared_ptr<policy_inference_core::InferenceBackendBase> backend;
   try
   {
-    loader = std::make_unique<pluginlib::ClassLoader<policy_inference_demo::InferenceBackendBase>>(
-      "policy_inference_demo",
-      "policy_inference_demo::InferenceBackendBase");
+    loader = std::make_unique<pluginlib::ClassLoader<policy_inference_core::InferenceBackendBase>>(
+      "policy_inference_core",
+      "policy_inference_core::InferenceBackendBase");
     auto backend_instance = loader->createUniqueInstance(config.backend_plugin);
-    backend = std::shared_ptr<policy_inference_demo::InferenceBackendBase>(std::move(backend_instance));
+    backend = std::shared_ptr<policy_inference_core::InferenceBackendBase>(std::move(backend_instance));
   }
   catch (const pluginlib::PluginlibException & ex)
   {
@@ -74,9 +74,9 @@ int main(int argc, char ** argv)
     return 1;
   }
 
-  policy_inference_demo::InferenceRequest request;
+  policy_inference_core::InferenceRequest request;
   request.features = {1.0, 2.0, 3.0};
-  policy_inference_demo::InferenceResponse response;
+  policy_inference_core::InferenceResponse response;
   if (!backend->infer(request, response))
   {
     std::cerr << "Inference call failed.\n";

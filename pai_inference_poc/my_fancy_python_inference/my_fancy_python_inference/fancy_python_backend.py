@@ -1,8 +1,8 @@
-"""Minimal external Python backend for `policy_inference_demo`."""
+"""Minimal external Python backend for `policy_inference_core`."""
 
 
 class FancyPythonBackend:
-    """Simple backend used through `policy_inference_demo/PythonBackendBridge`."""
+    """Simple backend used through `policy_inference_core/PythonBackendBridge`."""
 
     def __init__(self) -> None:
         self._initialized = False

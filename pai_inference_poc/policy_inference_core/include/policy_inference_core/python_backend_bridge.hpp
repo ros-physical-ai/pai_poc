@@ -5,11 +5,11 @@
 
 #pragma once
 
-#include "policy_inference_demo/core/inference_backend_base.hpp"
+#include "policy_inference_core/inference_backend_base.hpp"
 
 #include <memory>
 
-namespace policy_inference_demo
+namespace policy_inference_core
 {
 
 /**
@@ -39,5 +39,5 @@ private:
   std::string backend_id_ = "python_backend_bridge";
 };
 
-}  // namespace policy_inference_demo
+}  // namespace policy_inference_core
 

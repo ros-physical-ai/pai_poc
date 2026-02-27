@@ -1,9 +1,9 @@
 # my_fancy_python_inference
 
-Minimal external Python inference implementation for `policy_inference_demo`.
+Minimal external Python inference implementation for `policy_inference_core`.
 
 This package is consumed through the existing C++ bridge backend plugin:
-`policy_inference_demo/PythonBackendBridge`.
+`policy_inference_core/PythonBackendBridge`.
 
 ## Python Class
 
@@ -15,14 +15,14 @@ This package is consumed through the existing C++ bridge backend plugin:
 2. Prints a heartbeat on the first inference call (and every 100 calls).
 3. Returns deterministic numeric outputs.
 
-## Use with `policy_inference_demo`
+## Use with `policy_inference_core`
 
 Set:
 
 ```yaml
 policy_inference:
   ros__parameters:
-    backend_plugin: policy_inference_demo/PythonBackendBridge
+    backend_plugin: policy_inference_core/PythonBackendBridge
     python_module: my_fancy_python_inference.fancy_python_backend
     python_class: FancyPythonBackend
     model_uri: fancy_python.onnx

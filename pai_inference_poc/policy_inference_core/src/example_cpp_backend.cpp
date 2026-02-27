@@ -3,7 +3,7 @@
  * @brief Implementation of deterministic C++ example backend.
  */
 
-#include "policy_inference_demo/core/example_cpp_backend.hpp"
+#include "policy_inference_core/example_cpp_backend.hpp"
 
 #include <algorithm>
 #include <cmath>
@@ -11,7 +11,7 @@
 
 #include "pluginlib/class_list_macros.hpp"
 
-namespace policy_inference_demo
+namespace policy_inference_core
 {
 
 bool ExampleCppBackend::initialize(const InferenceBackendConfig & config)
@@ -59,8 +59,8 @@ std::string ExampleCppBackend::id() const
   return "example_cpp_backend";
 }
 
-}  // namespace policy_inference_demo
+}  // namespace policy_inference_core
 
 PLUGINLIB_EXPORT_CLASS(
-  policy_inference_demo::ExampleCppBackend,
-  policy_inference_demo::InferenceBackendBase)
+  policy_inference_core::ExampleCppBackend,
+  policy_inference_core::InferenceBackendBase)

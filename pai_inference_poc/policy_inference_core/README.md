@@ -1,4 +1,4 @@
-# `policy_inference_demo`
+# `policy_inference_core`
 
 Shared policy inference contract and built-in backend plugins.
 
@@ -27,29 +27,29 @@ Build and source this package:
 
 ```bash
 cd colcon_ws
-colcon build --symlink-install --packages-up-to policy_inference_demo
+colcon build --symlink-install --packages-up-to policy_inference_core
 source install/setup.bash
 ```
 
 ### Built-in C++ backend
 
 ```bash
-ros2 run policy_inference_demo backend_plugin_smoke cpp
+ros2 run policy_inference_core backend_plugin_smoke cpp
 ```
 
 ### Built-in Python backend
 
 ```bash
-ros2 run policy_inference_demo backend_plugin_smoke python
+ros2 run policy_inference_core backend_plugin_smoke python
 ```
 
 ## Backend Plugin Layer
 
-- Base type: `policy_inference_demo::InferenceBackendBase`
-- Plugin XML: `policy_inference_demo/policy_inference_demo_backend_plugins.xml`
+- Base type: `policy_inference_core::InferenceBackendBase`
+- Plugin XML: `policy_inference_core/policy_inference_core_backend_plugins.xml`
 - Built-in plugins:
-  - `policy_inference_demo/ExampleCppBackend`
-  - `policy_inference_demo/PythonBackendBridge`
+  - `policy_inference_core/ExampleCppBackend`
+  - `policy_inference_core/PythonBackendBridge`
 
 ## Backend Parameters
 
@@ -74,30 +74,30 @@ Demo-only input parameter used by host packages:
 
 In your own package:
 
-1. Depend on `policy_inference_demo` and `pluginlib`.
-2. Implement `policy_inference_demo::InferenceBackendBase`.
+1. Depend on `policy_inference_core` and `pluginlib`.
+2. Implement `policy_inference_core::InferenceBackendBase`.
 3. Export with `PLUGINLIB_EXPORT_CLASS`.
-4. Provide plugin XML with base class `policy_inference_demo::InferenceBackendBase`.
+4. Provide plugin XML with base class `policy_inference_core::InferenceBackendBase`.
 5. Export the XML in CMake:
-- `pluginlib_export_plugin_description_file(policy_inference_demo your_backend_plugins.xml)`
+- `pluginlib_export_plugin_description_file(policy_inference_core your_backend_plugins.xml)`
 
 Minimal shape:
 
 ```cpp
-class MyCppBackend : public policy_inference_demo::InferenceBackendBase
+class MyCppBackend : public policy_inference_core::InferenceBackendBase
 {
 public:
-  bool initialize(const policy_inference_demo::InferenceBackendConfig & config) override;
+  bool initialize(const policy_inference_core::InferenceBackendConfig & config) override;
   bool infer(
-    const policy_inference_demo::InferenceRequest & request,
-    policy_inference_demo::InferenceResponse & response) override;
+    const policy_inference_core::InferenceRequest & request,
+    policy_inference_core::InferenceResponse & response) override;
   std::string id() const override { return "my_cpp_backend"; }
 };
 ```
 
 ## Add a New Python Backend
 
-No changes to `policy_inference_demo` are required when using `PythonBackendBridge`.
+No changes to `policy_inference_core` are required when using `PythonBackendBridge`.
 
 Implement a Python class with:
 
@@ -107,7 +107,7 @@ Implement a Python class with:
 
 Then configure:
 
-1. `backend_plugin: policy_inference_demo/PythonBackendBridge`
+1. `backend_plugin: policy_inference_core/PythonBackendBridge`
 2. `python_module: your_package.your_module`
 3. `python_class: YourBackendClass`
 

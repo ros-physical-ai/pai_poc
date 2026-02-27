@@ -9,7 +9,7 @@
 #include <string>
 #include <vector>
 
-namespace policy_inference_demo
+namespace policy_inference_core
 {
 
 /**
@@ -53,7 +53,7 @@ struct InferenceResponse
  */
 struct InferenceBackendConfig
 {
-  std::string backend_plugin = "policy_inference_demo/ExampleCppBackend";
+  std::string backend_plugin = "policy_inference_core/ExampleCppBackend";
   std::string model_uri = "example_model.onnx";
   std::size_t output_size = 3U;
   double output_scale = 1.0;
@@ -62,4 +62,4 @@ struct InferenceBackendConfig
   std::string python_class = "";
 };
 
-}  // namespace policy_inference_demo
+}  // namespace policy_inference_core

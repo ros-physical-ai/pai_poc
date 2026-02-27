@@ -28,7 +28,7 @@ rclcpp::Logger kLogger = rclcpp::get_logger("policy_inference_ros2_control.contr
 
 controller_interface::CallbackReturn Ros2ControlPolicyInference::on_init()
 {
-  auto_declare<std::string>("backend_plugin", "policy_inference_demo/ExampleCppBackend");
+  auto_declare<std::string>("backend_plugin", "policy_inference_core/ExampleCppBackend");
   auto_declare<std::string>("model_uri", "example_model.onnx");
   auto_declare<int>("output_size", 3);
   auto_declare<double>("output_scale", 1.0);
@@ -69,11 +69,11 @@ bool Ros2ControlPolicyInference::load_backend_plugin()
   try
   {
     backend_loader_ = std::make_unique<
-      pluginlib::ClassLoader<policy_inference_demo::InferenceBackendBase>>(
-      "policy_inference_demo",
-      "policy_inference_demo::InferenceBackendBase");
+      pluginlib::ClassLoader<policy_inference_core::InferenceBackendBase>>(
+      "policy_inference_core",
+      "policy_inference_core::InferenceBackendBase");
     auto backend_instance = backend_loader_->createUniqueInstance(config_.backend_plugin);
-    backend_ = std::shared_ptr<policy_inference_demo::InferenceBackendBase>(
+    backend_ = std::shared_ptr<policy_inference_core::InferenceBackendBase>(
       std::move(backend_instance));
   }
   catch (const pluginlib::PluginlibException & ex)
@@ -106,9 +106,9 @@ bool Ros2ControlPolicyInference::run_inference_once(const char * context_tag)
     return false;
   }
 
-  policy_inference_demo::InferenceRequest request;
+  policy_inference_core::InferenceRequest request;
   request.features = demo_input_;
-  policy_inference_demo::InferenceResponse response;
+  policy_inference_core::InferenceResponse response;
 
   if (!backend_->infer(request, response))
   {

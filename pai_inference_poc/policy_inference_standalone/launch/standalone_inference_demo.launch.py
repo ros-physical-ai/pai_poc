@@ -10,7 +10,7 @@ from launch_ros.parameter_descriptions import ParameterValue
 def generate_launch_description() -> LaunchDescription:
     backend_plugin_arg = DeclareLaunchArgument(
         "backend_plugin",
-        default_value="policy_inference_demo/ExampleCppBackend",
+        default_value="policy_inference_core/ExampleCppBackend",
         description="Backend plugin id implementing `InferenceBackendBase`.",
     )
     model_uri_arg = DeclareLaunchArgument(

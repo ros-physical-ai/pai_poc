@@ -3,8 +3,8 @@
  * @brief Demo executable showing backend plugin usage outside `ros2_control`.
  */
 
-#include "policy_inference_demo/core/inference_backend_base.hpp"
-#include "policy_inference_demo/core/policy_types.hpp"
+#include "policy_inference_core/inference_backend_base.hpp"
+#include "policy_inference_core/policy_types.hpp"
 
 #include <memory>
 #include <string>
@@ -25,7 +25,7 @@ public:
   {
     declare_parameter<std::string>(
       "backend_plugin",
-      "policy_inference_demo/ExampleCppBackend");
+      "policy_inference_core/ExampleCppBackend");
     declare_parameter<std::string>("model_uri", "example_model.onnx");
     declare_parameter<int>("output_size", 3);
     declare_parameter<double>("output_scale", 1.0);
@@ -34,7 +34,7 @@ public:
     declare_parameter<std::string>("python_class", "");
     declare_parameter<std::vector<double>>("demo_input", {0.5, 1.0, 2.0});
 
-    policy_inference_demo::InferenceBackendConfig config;
+    policy_inference_core::InferenceBackendConfig config;
     config.backend_plugin = get_parameter("backend_plugin").as_string();
     config.model_uri = get_parameter("model_uri").as_string();
     config.output_size = static_cast<std::size_t>(get_parameter("output_size").as_int());
@@ -46,11 +46,11 @@ public:
     try
     {
       backend_loader_ =
-        std::make_unique<pluginlib::ClassLoader<policy_inference_demo::InferenceBackendBase>>(
-        "policy_inference_demo",
-        "policy_inference_demo::InferenceBackendBase");
+        std::make_unique<pluginlib::ClassLoader<policy_inference_core::InferenceBackendBase>>(
+        "policy_inference_core",
+        "policy_inference_core::InferenceBackendBase");
       auto backend = backend_loader_->createUniqueInstance(config.backend_plugin);
-      backend_ = std::shared_ptr<policy_inference_demo::InferenceBackendBase>(std::move(backend));
+      backend_ = std::shared_ptr<policy_inference_core::InferenceBackendBase>(std::move(backend));
     }
     catch (const pluginlib::PluginlibException & ex)
     {
@@ -79,10 +79,10 @@ private:
    */
   void run_once()
   {
-    policy_inference_demo::InferenceRequest request;
+    policy_inference_core::InferenceRequest request;
     request.features = get_parameter("demo_input").as_double_array();
 
-    policy_inference_demo::InferenceResponse response;
+    policy_inference_core::InferenceResponse response;
     if (!backend_ || !backend_->infer(request, response))
     {
       RCLCPP_WARN(get_logger(), "Inference call failed.");
@@ -107,8 +107,8 @@ private:
       output_repr.c_str());
   }
 
-  std::shared_ptr<policy_inference_demo::InferenceBackendBase> backend_;
-  std::unique_ptr<pluginlib::ClassLoader<policy_inference_demo::InferenceBackendBase>>
+  std::shared_ptr<policy_inference_core::InferenceBackendBase> backend_;
+  std::unique_ptr<pluginlib::ClassLoader<policy_inference_core::InferenceBackendBase>>
     backend_loader_;
   rclcpp::TimerBase::SharedPtr timer_;
 };

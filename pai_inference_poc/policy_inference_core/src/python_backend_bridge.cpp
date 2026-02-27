@@ -3,7 +3,7 @@
  * @brief Python bridge backend implementation for dynamic Python inference classes.
  */
 
-#include "policy_inference_demo/core/python_backend_bridge.hpp"
+#include "policy_inference_core/python_backend_bridge.hpp"
 
 #include <Python.h>
 
@@ -13,12 +13,12 @@
 #include "pluginlib/class_list_macros.hpp"
 #include "rclcpp/logging.hpp"
 
-namespace policy_inference_demo
+namespace policy_inference_core
 {
 
 namespace
 {
-rclcpp::Logger kLogger = rclcpp::get_logger("policy_inference_demo.python_backend_bridge");
+rclcpp::Logger kLogger = rclcpp::get_logger("policy_inference_core.python_backend_bridge");
 std::mutex kPythonInitMutex;
 
 bool parse_output_sequence(PyObject * obj, std::vector<double> & outputs)
@@ -289,8 +289,8 @@ std::string PythonBackendBridge::id() const
   return backend_id_;
 }
 
-}  // namespace policy_inference_demo
+}  // namespace policy_inference_core
 
 PLUGINLIB_EXPORT_CLASS(
-  policy_inference_demo::PythonBackendBridge,
-  policy_inference_demo::InferenceBackendBase)
+  policy_inference_core::PythonBackendBridge,
+  policy_inference_core::InferenceBackendBase)

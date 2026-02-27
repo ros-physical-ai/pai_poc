@@ -2,7 +2,7 @@
   <class
     name="my_fancy_cpp_inference/FancyCppBackend"
     type="my_fancy_cpp_inference::FancyCppBackend"
-    base_class_type="policy_inference_demo::InferenceBackendBase">
+    base_class_type="policy_inference_core::InferenceBackendBase">
     <description>
       Minimal external C++ inference backend plugin.
     </description>

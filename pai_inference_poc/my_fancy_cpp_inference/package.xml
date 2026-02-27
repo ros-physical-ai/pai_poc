@@ -4,7 +4,7 @@
   <name>my_fancy_cpp_inference</name>
   <version>0.0.1</version>
   <description>
-    Minimal external C++ backend plugin for `policy_inference_demo`.
+    Minimal external C++ backend plugin for `policy_inference_core`.
   </description>
   <maintainer email="jennifer@example.com">Jennifer</maintainer>
   <license>Apache-2.0</license>
@@ -12,7 +12,7 @@
   <buildtool_depend>ament_cmake</buildtool_depend>
 
   <depend>pluginlib</depend>
-  <depend>policy_inference_demo</depend>
+  <depend>policy_inference_core</depend>
   <depend>rclcpp</depend>
 
   <export>

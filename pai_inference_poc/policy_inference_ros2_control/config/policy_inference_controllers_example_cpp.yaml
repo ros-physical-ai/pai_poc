@@ -10,7 +10,7 @@ controller_manager:
 
 policy_inference:
   ros__parameters:
-    backend_plugin: policy_inference_demo/ExampleCppBackend
+    backend_plugin: policy_inference_core/ExampleCppBackend
     model_uri: example_cpp_model.onnx
     output_size: 3
     output_scale: 1.0

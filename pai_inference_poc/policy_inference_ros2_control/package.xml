@@ -13,7 +13,7 @@
 
   <depend>controller_interface</depend>
   <depend>pluginlib</depend>
-  <depend>policy_inference_demo</depend>
+  <depend>policy_inference_core</depend>
   <depend>rclcpp</depend>
 
   <exec_depend>controller_manager</exec_depend>

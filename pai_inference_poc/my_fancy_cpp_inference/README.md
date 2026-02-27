@@ -1,6 +1,6 @@
 # my_fancy_cpp_inference
 
-Minimal external C++ backend plugin for `policy_inference_demo`.
+Minimal external C++ backend plugin for `policy_inference_core`.
 
 ## Backend Plugin ID
 
@@ -12,7 +12,7 @@ Minimal external C++ backend plugin for `policy_inference_demo`.
 2. Prints a heartbeat on the first inference call (and every 100 calls).
 3. Produces deterministic numeric outputs.
 
-## Use with `policy_inference_demo`
+## Use with `policy_inference_core`
 
 Set the backend in your controller or standalone parameters:
 

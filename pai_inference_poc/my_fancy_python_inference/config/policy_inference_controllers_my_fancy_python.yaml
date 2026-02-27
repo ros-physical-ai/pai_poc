@@ -10,7 +10,7 @@ controller_manager:
 
 policy_inference:
   ros__parameters:
-    backend_plugin: policy_inference_demo/PythonBackendBridge
+    backend_plugin: policy_inference_core/PythonBackendBridge
     model_uri: fancy_python.onnx
     output_size: 4
     output_scale: 1.0

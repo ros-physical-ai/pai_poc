@@ -7,7 +7,7 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 
 find_package(ament_cmake REQUIRED)
 find_package(pluginlib REQUIRED)
-find_package(policy_inference_demo REQUIRED)
+find_package(policy_inference_core REQUIRED)
 find_package(rclcpp REQUIRED)
 
 add_library(my_fancy_cpp_inference_plugin SHARED
@@ -17,10 +17,10 @@ target_include_directories(my_fancy_cpp_inference_plugin PUBLIC
   $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/include>
   $<INSTALL_INTERFACE:include>
 )
-ament_target_dependencies(my_fancy_cpp_inference_plugin pluginlib policy_inference_demo rclcpp)
+ament_target_dependencies(my_fancy_cpp_inference_plugin pluginlib policy_inference_core rclcpp)
 
 pluginlib_export_plugin_description_file(
-  policy_inference_demo
+  policy_inference_core
   my_fancy_cpp_inference_plugins.xml
 )
 
@@ -49,6 +49,6 @@ install(
 )
 
 ament_export_include_directories(include)
-ament_export_dependencies(pluginlib policy_inference_demo rclcpp)
+ament_export_dependencies(pluginlib policy_inference_core rclcpp)
 
 ament_package()

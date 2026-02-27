@@ -10,7 +10,7 @@
 
 #pragma once
 
-#include "policy_inference_demo/core/inference_backend_base.hpp"
+#include "policy_inference_core/inference_backend_base.hpp"
 
 #include <memory>
 #include <vector>
@@ -56,10 +56,10 @@ private:
 
   bool initialized_ = false;
   bool active_ = false;
-  policy_inference_demo::InferenceBackendConfig config_;
+  policy_inference_core::InferenceBackendConfig config_;
   std::vector<double> demo_input_;
-  std::unique_ptr<pluginlib::ClassLoader<policy_inference_demo::InferenceBackendBase>> backend_loader_;
-  std::shared_ptr<policy_inference_demo::InferenceBackendBase> backend_;
+  std::unique_ptr<pluginlib::ClassLoader<policy_inference_core::InferenceBackendBase>> backend_loader_;
+  std::shared_ptr<policy_inference_core::InferenceBackendBase> backend_;
 };
 
 }  // namespace policy_inference_ros2_control

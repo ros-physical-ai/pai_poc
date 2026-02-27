@@ -8,7 +8,7 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 find_package(ament_cmake REQUIRED)
 find_package(controller_interface REQUIRED)
 find_package(pluginlib REQUIRED)
-find_package(policy_inference_demo REQUIRED)
+find_package(policy_inference_core REQUIRED)
 find_package(rclcpp REQUIRED)
 
 add_library(policy_inference_ros2_control_plugin SHARED
@@ -22,7 +22,7 @@ ament_target_dependencies(
   policy_inference_ros2_control_plugin
   controller_interface
   pluginlib
-  policy_inference_demo
+  policy_inference_core
   rclcpp
 )
 
@@ -73,6 +73,6 @@ if(BUILD_TESTING)
 endif()
 
 ament_export_include_directories(include)
-ament_export_dependencies(controller_interface pluginlib policy_inference_demo rclcpp)
+ament_export_dependencies(controller_interface pluginlib policy_inference_core rclcpp)
 
 ament_package()

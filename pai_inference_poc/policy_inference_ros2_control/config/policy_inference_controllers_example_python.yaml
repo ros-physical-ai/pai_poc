@@ -10,11 +10,11 @@ controller_manager:
 
 policy_inference:
   ros__parameters:
-    backend_plugin: policy_inference_demo/PythonBackendBridge
+    backend_plugin: policy_inference_core/PythonBackendBridge
     model_uri: example_python_model.onnx
     output_size: 4
     output_scale: 1.0
     output_bias: 0.0
-    python_module: policy_inference_demo_py.example_python_backend
+    python_module: policy_inference_core_py.example_python_backend
     python_class: ExamplePythonBackend
     demo_input: [1.0, 2.0, 3.0]
