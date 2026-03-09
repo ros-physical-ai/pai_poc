@@ -1,0 +1,89 @@
+cmake_minimum_required(VERSION 3.16)
+project(policy_inference_core LANGUAGES CXX)
+
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_CXX_EXTENSIONS OFF)
+
+find_package(ament_cmake REQUIRED)
+find_package(ament_cmake_python REQUIRED)
+find_package(pluginlib REQUIRED)
+find_package(Python3 COMPONENTS Development REQUIRED)
+find_package(rclcpp REQUIRED)
+
+add_library(policy_inference_core_example_cpp_backend_plugin SHARED
+  src/example_cpp_backend.cpp
+)
+target_include_directories(policy_inference_core_example_cpp_backend_plugin PUBLIC
+  $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/include>
+  $<INSTALL_INTERFACE:include>
+)
+ament_target_dependencies(policy_inference_core_example_cpp_backend_plugin pluginlib rclcpp)
+
+add_library(policy_inference_core_python_backend_plugin SHARED
+  src/python_backend_bridge.cpp
+)
+target_include_directories(policy_inference_core_python_backend_plugin PUBLIC
+  $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/include>
+  $<INSTALL_INTERFACE:include>
+)
+ament_target_dependencies(policy_inference_core_python_backend_plugin pluginlib rclcpp)
+target_link_libraries(policy_inference_core_python_backend_plugin Python3::Python)
+
+pluginlib_export_plugin_description_file(
+  policy_inference_core
+  policy_inference_core_backend_plugins.xml
+)
+
+add_executable(backend_plugin_smoke src/backend_plugin_smoke.cpp)
+target_include_directories(backend_plugin_smoke PUBLIC
+  $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/include>
+  $<INSTALL_INTERFACE:include>
+)
+ament_target_dependencies(backend_plugin_smoke pluginlib rclcpp)
+
+ament_python_install_package(policy_inference_core_py)
+
+install(
+  DIRECTORY include/
+  DESTINATION include
+)
+
+install(
+  FILES
+    policy_inference_core_backend_plugins.xml
+    README.md
+  DESTINATION share/${PROJECT_NAME}
+)
+
+install(
+  TARGETS
+    policy_inference_core_example_cpp_backend_plugin
+    policy_inference_core_python_backend_plugin
+    backend_plugin_smoke
+  ARCHIVE DESTINATION lib
+  LIBRARY DESTINATION lib
+  RUNTIME DESTINATION lib/${PROJECT_NAME}
+)
+
+if(BUILD_TESTING)
+  find_package(ament_cmake_gtest REQUIRED)
+
+  ament_add_gtest(test_inference_core test/test_inference_core.cpp)
+  target_link_libraries(
+    test_inference_core
+    policy_inference_core_example_cpp_backend_plugin
+  )
+  if(TARGET test_inference_core)
+    set_tests_properties(
+      test_inference_core
+      PROPERTIES ENVIRONMENT "ROS_LOG_DIR=${CMAKE_CURRENT_BINARY_DIR}/ros_test_logs"
+    )
+  endif()
+
+endif()
+
+ament_export_include_directories(include)
+ament_export_dependencies(pluginlib rclcpp)
+
+ament_package()

@@ -1,0 +1,10 @@
+<library path="policy_inference_ros2_control_plugin">
+  <class
+    name="policy_inference_ros2_control/Ros2ControlPolicyInference"
+    type="policy_inference_ros2_control::Ros2ControlPolicyInference"
+    base_class_type="controller_interface::ControllerInterface">
+    <description>
+      Thin `ros2_control` controller that delegates inference to a backend plugin.
+    </description>
+  </class>
+</library>

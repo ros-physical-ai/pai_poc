@@ -1,0 +1,11 @@
+<library path="my_fancy_cpp_inference_plugin">
+  <class
+    name="my_fancy_cpp_inference/FancyCppBackend"
+    type="my_fancy_cpp_inference::FancyCppBackend"
+    base_class_type="policy_inference_core::InferenceBackendBase">
+    <description>
+      Minimal external C++ inference backend plugin.
+    </description>
+  </class>
+</library>
+

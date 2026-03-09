@@ -1,0 +1,20 @@
+<library path="policy_inference_core_example_cpp_backend_plugin">
+  <class
+    name="policy_inference_core/ExampleCppBackend"
+    type="policy_inference_core::ExampleCppBackend"
+    base_class_type="policy_inference_core::InferenceBackendBase">
+    <description>
+      Deterministic C++ example backend plugin for `InferenceBackendBase` dynamic loading.
+    </description>
+  </class>
+</library>
+<library path="policy_inference_core_python_backend_plugin">
+  <class
+    name="policy_inference_core/PythonBackendBridge"
+    type="policy_inference_core::PythonBackendBridge"
+    base_class_type="policy_inference_core::InferenceBackendBase">
+    <description>
+      Backend plugin that forwards inference calls to a Python class implementation.
+    </description>
+  </class>
+</library>
